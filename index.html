@@ -4,129 +4,193 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#000000">
-<title>Vertex — all your services in one window</title>
+<title>Vertex — All Your Services in One Window</title>
 <meta name="description" content="Vertex is a desktop multi-service hub for macOS. Messengers, mail and web apps in one window, each service in its own isolated session.">
-<meta property="og:title" content="Vertex — all your services in one window">
+<meta property="og:title" content="Vertex — All Your Services in One Window">
 <meta property="og:description" content="Messengers, mail and web apps in one window. Each service in its own isolated session, so several accounts of the same service run side by side.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://kvlsx.github.io/vertex-site/assets/icon.png">
 <link rel="icon" type="image/png" href="assets/icon.png">
 <style>
 :root {
     color-scheme: dark;
-    --bg: #000; --surface: #0d0f13; --line: rgba(255,255,255,.09);
-    --fg: #f2f4f8; --muted: #8b939f; --blue: #0047d6; --blue-lift: #1a5cf0;
-    --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --bg: #000;
+    --surface: #0c0e12;
+    --surface-2: #131720;
+    --line: rgba(255,255,255,.08);
+    --line-strong: rgba(255,255,255,.16);
+    --fg: #f3f5f9;
+    --muted: #8c94a1;
+    --blue: #0047d6;
+    --blue-lift: #1b5cf2;
+    --glow: rgba(0,71,214,.35);
+    --ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --radius: 16px;
 }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
     margin: 0; background: var(--bg); color: var(--fg);
-    font-family: var(--ui); -webkit-font-smoothing: antialiased; line-height: 1.55;
+    font-family: var(--ui); -webkit-font-smoothing: antialiased; line-height: 1.6;
+    overflow-x: hidden;
 }
 a { color: inherit; }
-.wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+img { max-width: 100%; }
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+[hidden] { display: none !important; }
 
 /* ---------- Kopfzeile ---------- */
-header { padding: 26px 0; }
-header .wrap { display: flex; align-items: center; gap: 12px; }
-.brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
-.brand svg { width: 28px; height: 28px; color: var(--blue); }
-.brand span {
-    font-size: 15px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .26em; text-indent: .26em;
+header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: saturate(1.6) blur(16px);
+    -webkit-backdrop-filter: saturate(1.6) blur(16px);
+    border-bottom: 1px solid var(--line);
 }
-header nav { margin-left: auto; display: flex; gap: 22px; font-size: 13.5px; }
-header nav a { color: var(--muted); text-decoration: none; transition: color .12s ease; }
+header .wrap { display: flex; align-items: center; gap: 14px; height: 62px; }
+.brand { display: flex; align-items: center; gap: 11px; text-decoration: none; flex: none; }
+.brand svg { width: 26px; height: 26px; color: var(--blue-lift); }
+.brand span { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: .26em; text-indent: .26em; }
+header nav { margin-left: auto; display: flex; gap: 24px; font-size: 13.5px; }
+header nav a { color: var(--muted); text-decoration: none; transition: color .14s ease; }
 header nav a:hover { color: var(--fg); }
 
+/* Sprachwahl */
+.lang { display: flex; gap: 2px; background: var(--surface-2); border-radius: 9px; padding: 3px; flex: none; }
+.lang button {
+    border: 0; background: transparent; color: var(--muted); cursor: pointer;
+    font: inherit; font-size: 11.5px; font-weight: 600; letter-spacing: .06em;
+    padding: 5px 9px; border-radius: 6px; text-transform: uppercase;
+    transition: background-color .14s ease, color .14s ease;
+}
+.lang button:hover { color: var(--fg); }
+.lang button[aria-pressed="true"] { background: var(--blue); color: #fff; }
+
 /* ---------- Titelblock ---------- */
-.hero { padding: 76px 0 64px; text-align: center; }
-.hero .mark { width: 104px; height: 104px; color: var(--blue); }
+.hero { padding: 96px 0 72px; text-align: center; position: relative; }
+.hero::before {
+    content: ""; position: absolute; left: 50%; top: 0;
+    width: 900px; height: 420px; transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, var(--glow), transparent 68%);
+    pointer-events: none; z-index: -1;
+}
+.hero .mark { width: 96px; height: 96px; color: var(--blue-lift); }
 .hero h1 {
-    margin: 30px 0 0; font-size: 26px; font-weight: 600;
+    margin: 30px 0 0; font-size: 25px; font-weight: 600;
     text-transform: uppercase; letter-spacing: .3em; text-indent: .3em;
 }
-.hero .tag { margin: 18px auto 0; max-width: 46ch; font-size: 17px; color: var(--muted); text-wrap: balance; }
+.hero .claim {
+    margin: 22px auto 0; max-width: 20ch; font-size: 42px; font-weight: 700;
+    letter-spacing: -.035em; line-height: 1.1; text-wrap: balance;
+}
+.hero .tag { margin: 20px auto 0; max-width: 52ch; font-size: 16.5px; color: var(--muted); text-wrap: balance; }
 .cta { margin-top: 34px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .btn {
     display: inline-flex; align-items: center; gap: 9px;
-    padding: 12px 24px; border-radius: 11px; text-decoration: none;
-    font-size: 14.5px; font-weight: 600; letter-spacing: -.01em;
-    transition: background-color .14s ease, transform .1s ease, border-color .14s ease;
+    padding: 13px 26px; border-radius: 12px; text-decoration: none;
+    font-size: 15px; font-weight: 600; letter-spacing: -.012em;
+    transition: background-color .16s ease, transform .12s ease, box-shadow .16s ease;
 }
-.btn svg { width: 17px; height: 17px; }
-.btn-primary { background: var(--blue); color: #fff; }
+.btn svg { width: 17px; height: 17px; flex: none; }
+.btn-primary { background: var(--blue); color: #fff; box-shadow: 0 8px 28px rgba(0,71,214,.4); }
 .btn-primary:hover { background: var(--blue-lift); transform: translateY(-1px); }
-.btn-ghost { color: var(--fg); box-shadow: inset 0 0 0 1px var(--line); }
-.btn-ghost:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,.22); transform: translateY(-1px); }
-.meta { margin-top: 14px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.btn-ghost { color: var(--fg); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.btn-ghost:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,.3); transform: translateY(-1px); }
+.meta { margin-top: 16px; font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
 
-/* ---------- Bild ---------- */
-.shot { padding: 0 0 20px; }
-.shot img {
-    width: 100%; display: block; border-radius: 14px;
-    box-shadow: 0 30px 80px rgba(0,0,0,.6), inset 0 0 0 1px var(--line);
+/* ---------- Bilder ---------- */
+figure.shot { margin: 0; }
+figure.shot img {
+    width: 100%; display: block; border-radius: var(--radius);
+    box-shadow: 0 40px 90px rgba(0,0,0,.7), inset 0 0 0 1px var(--line);
 }
-.shot figcaption { margin-top: 12px; text-align: center; font-size: 12.5px; color: var(--muted); }
+figure.shot figcaption { margin-top: 14px; text-align: center; font-size: 12.5px; color: var(--muted); }
 
 /* ---------- Abschnitte ---------- */
-section { padding: 72px 0; }
-.sec-label {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--muted); margin: 0 0 10px;
-}
-h2 { font-size: 27px; margin: 0 0 14px; letter-spacing: -.025em; text-wrap: balance; }
-.lede { margin: 0; color: var(--muted); max-width: 62ch; font-size: 15px; }
+section { padding: 88px 0; border-top: 1px solid var(--line); }
+section:first-of-type { border-top: 0; }
+.sec-label { font-size: 10.5px; font-weight: 700; letter-spacing: .17em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+h2 { font-size: 30px; margin: 0 0 14px; letter-spacing: -.03em; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 60ch; font-size: 15.5px; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 34px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 38px; }
 .card {
-    background: var(--surface); border-radius: 14px; padding: 22px 20px;
+    background: linear-gradient(180deg, var(--surface-2), var(--surface));
+    border-radius: var(--radius); padding: 24px 22px;
+    box-shadow: inset 0 0 0 1px var(--line);
+    transition: box-shadow .18s ease, transform .18s ease;
+}
+.card:hover { box-shadow: inset 0 0 0 1px var(--line-strong); transform: translateY(-2px); }
+.card .ico {
+    width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center;
+    background: rgba(0,71,214,.16); box-shadow: inset 0 0 0 1px rgba(0,71,214,.34);
+}
+.card .ico svg { width: 19px; height: 19px; color: #6f9dff; }
+.card h3 { margin: 16px 0 8px; font-size: 16px; letter-spacing: -.015em; }
+.card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.62; }
+
+/* ---------- Dienste ---------- */
+.svcs { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.svcs figure {
+    margin: 0; display: flex; align-items: center; gap: 9px;
+    background: var(--surface); border-radius: 100px; padding: 7px 16px 7px 8px;
     box-shadow: inset 0 0 0 1px var(--line);
 }
-.card svg { width: 21px; height: 21px; color: var(--blue); }
-.card h3 { margin: 14px 0 7px; font-size: 15.5px; letter-spacing: -.012em; }
-.card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+.svcs img { width: 26px; height: 26px; display: block; }
+.svcs figcaption { font-size: 13px; }
+.svcs .more { color: var(--muted); font-size: 13px; align-self: center; padding: 7px 4px; }
 
 /* ---------- Farbfassungen ---------- */
-.icons { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 14px; margin-top: 30px; }
+.icons { display: grid; grid-template-columns: repeat(auto-fit, minmax(86px, 1fr)); gap: 16px; margin-top: 34px; }
 .icons figure { margin: 0; text-align: center; }
 .icons img { width: 62px; height: 62px; border-radius: 15px; display: block; margin: 0 auto; }
-.icons figcaption { margin-top: 8px; font-size: 11px; color: var(--muted); }
+.icons figcaption { margin-top: 9px; font-size: 11px; color: var(--muted); }
 
 /* ---------- Hinweis ---------- */
 .note {
-    margin-top: 30px; background: var(--surface); border-radius: 14px;
-    padding: 22px 24px; box-shadow: inset 0 0 0 1px var(--line);
+    margin-top: 32px; background: var(--surface); border-radius: var(--radius);
+    padding: 24px 26px; box-shadow: inset 0 0 0 1px var(--line);
     border-left: 3px solid #d9a441;
 }
-.note h3 { margin: 0 0 9px; font-size: 15.5px; }
-.note p { margin: 0 0 12px; font-size: 13.5px; color: var(--muted); }
+.note h3 { margin: 0 0 10px; font-size: 16px; }
+.note p { margin: 0 0 14px; font-size: 13.5px; color: var(--muted); }
 .note p:last-child { margin-bottom: 0; }
-code, pre {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
-}
+code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px; }
 pre {
-    background: #000; border-radius: 9px; padding: 13px 15px; overflow-x: auto;
-    box-shadow: inset 0 0 0 1px var(--line); color: #cfe0ff; margin: 0 0 12px;
+    background: #000; border-radius: 10px; padding: 14px 16px; overflow-x: auto;
+    box-shadow: inset 0 0 0 1px var(--line); color: #b9d2ff; margin: 0 0 14px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12.5px;
 }
 
 /* ---------- Anforderungen ---------- */
-.specs { list-style: none; margin: 26px 0 0; padding: 0; max-width: 560px; }
+.specs { list-style: none; margin: 30px 0 0; padding: 0; max-width: 580px; }
 .specs li {
-    display: flex; justify-content: space-between; gap: 16px;
-    padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 13.5px;
+    display: flex; justify-content: space-between; gap: 18px;
+    padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 13.5px;
 }
 .specs li:last-child { border-bottom: none; }
-.specs span { color: var(--muted); }
+.specs span { color: var(--muted); text-align: right; }
 
-footer { padding: 46px 0 64px; border-top: 1px solid var(--line); }
-footer .wrap { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+footer { padding: 48px 0 72px; border-top: 1px solid var(--line); }
+footer .wrap { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 footer p { margin: 0; font-size: 12.5px; color: var(--muted); }
-footer nav { margin-left: auto; display: flex; gap: 20px; font-size: 12.5px; }
+footer nav { margin-left: auto; display: flex; gap: 22px; font-size: 12.5px; }
 footer nav a { color: var(--muted); text-decoration: none; }
 footer nav a:hover { color: var(--fg); }
 
-a:focus-visible, .btn:focus-visible { outline: 2px solid var(--blue-lift); outline-offset: 3px; border-radius: 6px; }
-@media (prefers-reduced-motion: reduce) { * { transition-duration: .01ms !important; } }
+a:focus-visible, .btn:focus-visible, .lang button:focus-visible {
+    outline: 2px solid var(--blue-lift); outline-offset: 3px; border-radius: 6px;
+}
+@media (max-width: 620px) {
+    .hero { padding: 64px 0 52px; }
+    .hero .claim { font-size: 31px; }
+    h2 { font-size: 24px; }
+    header nav { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { transition-duration: .01ms !important; }
+}
 </style>
 </head>
 <body>
@@ -155,154 +219,344 @@ a:focus-visible, .btn:focus-visible { outline: 2px solid var(--blue-lift); outli
 
 <header>
   <div class="wrap">
-    <a class="brand" href="./"><svg><use href="#mark"/></svg><span>Vertex</span></a>
+    <a class="brand" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg><span>Vertex</span></a>
     <nav>
-      <a href="#features">Features</a>
-      <a href="#looks">Appearance</a>
-      <a href="#install">Install</a>
-      <a href="https://github.com/kvlsx/vertex-releases/releases">Releases</a>
+      <a href="#features" data-t="nav.features">Features</a>
+      <a href="#services" data-t="nav.services">Services</a>
+      <a href="#looks" data-t="nav.looks">Appearance</a>
+      <a href="#install" data-t="nav.install">Install</a>
     </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+      <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+    </div>
   </div>
 </header>
 
+<main id="top">
+
 <div class="wrap">
   <div class="hero">
-    <svg class="mark"><use href="#mark"/></svg>
+    <svg class="mark" aria-hidden="true"><use href="#mark"/></svg>
     <h1>Vertex</h1>
-    <p class="tag">Messengers, mail and web apps in one window. Each service runs in its own isolated session, so several accounts of the same service sit side by side.</p>
+    <p class="claim" data-t="hero.claim">All your services in one window</p>
+    <p class="tag" data-t="hero.tag">Messengers, mail and web apps side by side. Each service runs in its own isolated session, so several accounts of the same service stay signed in at once.</p>
     <div class="cta">
       <a class="btn btn-primary" href="https://github.com/kvlsx/vertex-releases/releases/latest">
-        <svg><use href="#i-download"/></svg> Download for macOS
+        <svg aria-hidden="true"><use href="#i-download"/></svg>
+        <span data-t="cta.download">Download for macOS</span>
       </a>
       <a class="btn btn-ghost" href="https://github.com/kvlsx/vertex-releases/releases">
-        <svg><use href="#i-github"/></svg> All releases
+        <svg aria-hidden="true"><use href="#i-github"/></svg>
+        <span data-t="cta.all">All Releases</span>
       </a>
     </div>
-    <p class="meta" id="meta">Apple Silicon · DMG · free</p>
+    <p class="meta" id="meta" data-t="meta.fallback">Apple&nbsp;Silicon · DMG · free</p>
   </div>
 
   <figure class="shot">
-    <img src="assets/screenshot-home.png" alt="Vertex with the service rail on the left and the home screen in the middle">
-    <figcaption>The rail holds your services; everything to the right is the service itself, untouched.</figcaption>
+    <img src="assets/shot-home-en.png" width="2400" height="1600" alt="Vertex with the service rail on the left and the home screen in the middle" fetchpriority="high">
+    <figcaption data-t="shot.home">The rail holds your services. Everything to the right is the service itself, untouched.</figcaption>
   </figure>
 </div>
 
 <section id="features">
   <div class="wrap">
-    <p class="sec-label">What it does</p>
-    <h2>One window instead of eight</h2>
-    <p class="lede">Vertex owns the frame — the rail, the title bar, notifications and settings. Inside, each service renders itself exactly as it does in a browser.</p>
+    <p class="sec-label" data-t="feat.label">What It Does</p>
+    <h2 data-t="feat.title">One window instead of eight</h2>
+    <p class="lede" data-t="feat.lede">Vertex owns the frame — the rail, the title bar, notifications and settings. Inside, each service renders itself exactly as it does in a browser.</p>
 
     <div class="grid">
       <div class="card">
-        <svg><use href="#i-shield"/></svg>
-        <h3>Isolated sessions</h3>
-        <p>Every service gets its own storage partition. Two work accounts and a private one in the same messenger, all logged in at once, none of them aware of the others.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+        <h3 data-t="f1.h">Isolated sessions</h3>
+        <p data-t="f1.p">Every service gets its own storage partition. Two work accounts and a private one in the same messenger, all signed in at once, none of them aware of the others.</p>
       </div>
       <div class="card">
-        <svg><use href="#i-bell"/></svg>
-        <h3>System notifications</h3>
-        <p>Banners come from macOS itself, so dismissing one does not drag you into the app. An in-app bubble takes over if the system turns them down.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-bell"/></svg></span>
+        <h3 data-t="f2.h">System notifications</h3>
+        <p data-t="f2.p">Banners come from macOS itself, so dismissing one does not drag you into the app. An in-app bubble takes over if the system turns them down.</p>
       </div>
       <div class="card">
-        <svg><use href="#i-grid"/></svg>
-        <h3>78 services ready</h3>
-        <p>Telegram, Slack, WhatsApp, Discord, Gmail, Notion, Figma, Linear and more from the catalog — or paste any URL and it becomes a service.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-grid"/></svg></span>
+        <h3 data-t="f3.h">78 services ready</h3>
+        <p data-t="f3.p">Telegram, Slack, WhatsApp, Discord, Gmail, Notion, Figma, Linear and more from the catalog — or paste any URL and it becomes a service.</p>
       </div>
       <div class="card">
-        <svg><use href="#i-moon"/></svg>
-        <h3>Sleeps when idle</h3>
-        <p>Inactive services are throttled and put to sleep after a few minutes, so a dozen open tabs do not cost you a dozen tabs' worth of CPU.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-moon"/></svg></span>
+        <h3 data-t="f4.h">Sleeps when idle</h3>
+        <p data-t="f4.p">Inactive services are throttled and put to sleep after a few minutes, so a dozen open services do not cost you a dozen services' worth of CPU.</p>
       </div>
       <div class="card">
-        <svg><use href="#i-puzzle"/></svg>
-        <h3>Extensions</h3>
-        <p>Content blocking, cookie banners, proxy. The registry is data only — plain JSON, no executable code is fetched or run.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-puzzle"/></svg></span>
+        <h3 data-t="f5.h">Extensions</h3>
+        <p data-t="f5.p">Content blocking, cookie banners, proxy. The registry is data only — plain JSON, no executable code is fetched or run.</p>
       </div>
       <div class="card">
-        <svg><use href="#i-palette"/></svg>
-        <h3>Yours to colour</h3>
-        <p>Eleven palettes, each in a dark and a light version, plus twelve colourways for the app icon. Pick a look and the whole frame follows.</p>
+        <span class="ico"><svg aria-hidden="true"><use href="#i-palette"/></svg></span>
+        <h3 data-t="f6.h">Yours to colour</h3>
+        <p data-t="f6.p">Eleven palettes, each in a dark and a light version, plus twelve colourways for the app icon. Pick a look and the whole frame follows.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <p class="sec-label" data-t="svc.label">Services</p>
+    <h2 data-t="svc.title">Bundled icons for the messengers you use</h2>
+    <p class="lede" data-t="svc.lede">Twelve messengers ship with their own icon in one consistent style, so the rail reads cleanly instead of mixing cut-out logos with white boxes. Everything else uses the site favicon.</p>
+
+    <div class="svcs">
+      <figure><img src="assets/svc/telegram.svg" width="26" height="26" alt=""><figcaption>Telegram</figcaption></figure>
+      <figure><img src="assets/svc/whatsapp.svg" width="26" height="26" alt=""><figcaption>WhatsApp</figcaption></figure>
+      <figure><img src="assets/svc/signal.svg" width="26" height="26" alt=""><figcaption>Signal</figcaption></figure>
+      <figure><img src="assets/svc/discord.svg" width="26" height="26" alt=""><figcaption>Discord</figcaption></figure>
+      <figure><img src="assets/svc/slack.svg" width="26" height="26" alt=""><figcaption>Slack</figcaption></figure>
+      <figure><img src="assets/svc/element.svg" width="26" height="26" alt=""><figcaption>Element</figcaption></figure>
+      <figure><img src="assets/svc/messenger.svg" width="26" height="26" alt=""><figcaption>Messenger</figcaption></figure>
+      <figure><img src="assets/svc/teams.svg" width="26" height="26" alt=""><figcaption>Teams</figcaption></figure>
+      <figure><img src="assets/svc/threema.svg" width="26" height="26" alt=""><figcaption>Threema</figcaption></figure>
+      <figure><img src="assets/svc/viber.svg" width="26" height="26" alt=""><figcaption>Viber</figcaption></figure>
+      <figure><img src="assets/svc/skype.svg" width="26" height="26" alt=""><figcaption>Skype</figcaption></figure>
+      <figure><img src="assets/svc/googlechat.svg" width="26" height="26" alt=""><figcaption>Google Chat</figcaption></figure>
+      <span class="more" data-t="svc.more">+ 66 more in the catalog</span>
     </div>
   </div>
 </section>
 
 <section id="looks">
   <div class="wrap">
-    <p class="sec-label">Appearance</p>
-    <h2>Twelve icons, twenty-two themes</h2>
-    <p class="lede">The mark is a vertex — the point where edges meet, which is what the app does with your services. Pick the colourway that suits your dock.</p>
+    <p class="sec-label" data-t="look.label">Appearance</p>
+    <h2 data-t="look.title">Twelve icons, twenty-two themes</h2>
+    <p class="lede" data-t="look.lede">The mark is a vertex — the point where edges meet, which is what the app does with your services. Pick the colourway that suits your dock.</p>
 
     <div class="icons">
-      <figure><img src="assets/icons/tech.png" alt="Tech"><figcaption>Tech</figcaption></figure>
-      <figure><img src="assets/icons/ocean.png" alt="Ocean"><figcaption>Ocean</figcaption></figure>
-      <figure><img src="assets/icons/midnight.png" alt="Midnight"><figcaption>Midnight</figcaption></figure>
-      <figure><img src="assets/icons/golden.png" alt="Golden"><figcaption>Golden</figcaption></figure>
-      <figure><img src="assets/icons/sunset.png" alt="Sunset"><figcaption>Sunset</figcaption></figure>
-      <figure><img src="assets/icons/forest.png" alt="Forest"><figcaption>Forest</figcaption></figure>
-      <figure><img src="assets/icons/mono.png" alt="Mono"><figcaption>Mono</figcaption></figure>
-      <figure><img src="assets/icons/inverse.png" alt="Inverse"><figcaption>Inverse</figcaption></figure>
-      <figure><img src="assets/icons/ocean-fill.png" alt="Ocean fill"><figcaption>Ocean fill</figcaption></figure>
-      <figure><img src="assets/icons/violet-fill.png" alt="Violet fill"><figcaption>Violet fill</figcaption></figure>
-      <figure><img src="assets/icons/warm-fill.png" alt="Warm fill"><figcaption>Warm fill</figcaption></figure>
-      <figure><img src="assets/icons/electric-fill.png" alt="Electric fill"><figcaption>Electric fill</figcaption></figure>
+      <figure><img src="assets/icons/tech.png" width="62" height="62" loading="lazy" alt="Tech"><figcaption>Tech</figcaption></figure>
+      <figure><img src="assets/icons/ocean.png" width="62" height="62" loading="lazy" alt="Ocean"><figcaption>Ocean</figcaption></figure>
+      <figure><img src="assets/icons/midnight.png" width="62" height="62" loading="lazy" alt="Midnight"><figcaption>Midnight</figcaption></figure>
+      <figure><img src="assets/icons/golden.png" width="62" height="62" loading="lazy" alt="Golden"><figcaption>Golden</figcaption></figure>
+      <figure><img src="assets/icons/sunset.png" width="62" height="62" loading="lazy" alt="Sunset"><figcaption>Sunset</figcaption></figure>
+      <figure><img src="assets/icons/forest.png" width="62" height="62" loading="lazy" alt="Forest"><figcaption>Forest</figcaption></figure>
+      <figure><img src="assets/icons/mono.png" width="62" height="62" loading="lazy" alt="Mono"><figcaption>Mono</figcaption></figure>
+      <figure><img src="assets/icons/inverse.png" width="62" height="62" loading="lazy" alt="Inverse"><figcaption>Inverse</figcaption></figure>
+      <figure><img src="assets/icons/ocean-fill.png" width="62" height="62" loading="lazy" alt="Ocean fill"><figcaption>Ocean fill</figcaption></figure>
+      <figure><img src="assets/icons/violet-fill.png" width="62" height="62" loading="lazy" alt="Violet fill"><figcaption>Violet fill</figcaption></figure>
+      <figure><img src="assets/icons/warm-fill.png" width="62" height="62" loading="lazy" alt="Warm fill"><figcaption>Warm fill</figcaption></figure>
+      <figure><img src="assets/icons/electric-fill.png" width="62" height="62" loading="lazy" alt="Electric fill"><figcaption>Electric fill</figcaption></figure>
     </div>
 
-    <figure class="shot" style="margin-top:34px">
-      <img src="assets/screenshot-settings.png" alt="Vertex settings with the palette picker and the app icon colourways">
-      <figcaption>Palette and icon are separate choices — a blue icon with a warm interface is allowed.</figcaption>
+    <figure class="shot" style="margin-top:40px">
+      <img src="assets/shot-settings-en.png" width="2400" height="1600" loading="lazy" alt="Vertex settings showing the palette picker and the app icon colourways">
+      <figcaption data-t="shot.settings">Palette and icon are separate choices — a blue icon with a warm interface is allowed.</figcaption>
     </figure>
   </div>
 </section>
 
 <section id="install">
   <div class="wrap">
-    <p class="sec-label">Install</p>
-    <h2>Getting it running</h2>
-    <p class="lede">Download the DMG, drag Vertex into Applications. One extra step the first time — please read it, otherwise the app looks broken when it is not.</p>
+    <p class="sec-label" data-t="ins.label">Install</p>
+    <h2 data-t="ins.title">Getting it running</h2>
+    <p class="lede" data-t="ins.lede">Download the DMG, drag Vertex into Applications. One extra step the first time — please read it, otherwise the app looks broken when it is not.</p>
 
     <div class="note">
-      <h3>macOS will block the first launch</h3>
-      <p>Vertex is signed <strong>ad-hoc</strong>, not with an Apple Developer ID — that certificate costs $99 a year and this is a free app. macOS therefore greets the first launch with “Vertex is damaged and can’t be opened”. The download is fine; macOS simply refuses to vouch for it.</p>
-      <p>Right-click <strong>Vertex.app</strong> and choose <strong>Open</strong>, then confirm. Or clear the quarantine flag once:</p>
+      <h3 data-t="ins.warnH">macOS will block the first launch</h3>
+      <p data-t="ins.warn1">Vertex is signed <strong>ad-hoc</strong>, not with an Apple Developer ID — that certificate costs $99 a year and this is a free app. macOS therefore greets the first launch with “Vertex is damaged and can’t be opened”. The download is fine; macOS simply refuses to vouch for it.</p>
+      <p data-t="ins.warn2">Right-click <strong>Vertex.app</strong> and choose <strong>Open</strong>, then confirm. Or clear the quarantine flag once:</p>
       <pre>xattr -dr com.apple.quarantine /Applications/Vertex.app</pre>
-      <p>After that it launches normally. Only the very first run is affected.</p>
+      <p data-t="ins.warn3">After that it launches normally. Only the very first run is affected.</p>
     </div>
 
     <ul class="specs">
-      <li>Platform <span>macOS 12 Monterey or newer</span></li>
-      <li>Architecture <span>Apple Silicon (arm64)</span></li>
-      <li>Download <span>DMG, about 122 MB</span></li>
-      <li>Price <span>free</span></li>
-      <li>Source <span>closed</span></li>
+      <li><span data-t="spec.os.k" style="color:inherit">Platform</span> <span data-t="spec.os.v">macOS 12 Monterey or newer</span></li>
+      <li><span data-t="spec.arch.k" style="color:inherit">Architecture</span> <span data-t="spec.arch.v">Apple Silicon (arm64)</span></li>
+      <li><span data-t="spec.dl.k" style="color:inherit">Download</span> <span data-t="spec.dl.v">DMG, about 122&nbsp;MB</span></li>
+      <li><span data-t="spec.price.k" style="color:inherit">Price</span> <span data-t="spec.price.v">free</span></li>
+      <li><span data-t="spec.src.k" style="color:inherit">Source</span> <span data-t="spec.src.v">closed</span></li>
     </ul>
   </div>
 </section>
 
+</main>
+
 <footer>
   <div class="wrap">
-    <a class="brand" href="./"><svg><use href="#mark"/></svg><span>Vertex</span></a>
-    <p>by kvls</p>
+    <a class="brand" href="#top"><svg aria-hidden="true"><use href="#mark"/></svg><span>Vertex</span></a>
+    <p data-t="foot.by">by kvls</p>
     <nav>
-      <a href="https://github.com/kvlsx/vertex-releases/releases">Releases</a>
-      <a href="https://github.com/kvlsx/vertex-extensions">Extensions</a>
+      <a href="https://github.com/kvlsx/vertex-releases/releases" data-t="nav.releases">Releases</a>
+      <a href="https://github.com/kvlsx/vertex-extensions" data-t="nav.ext">Extensions</a>
     </nav>
   </div>
 </footer>
 
 <script>
-// Version und Datum des neuesten Release nachtragen, damit die Seite nicht bei
-// jeder Veroeffentlichung von Hand angefasst werden muss.
+const I18N = {
+    en: {
+        'nav.features': 'Features', 'nav.services': 'Services', 'nav.looks': 'Appearance',
+        'nav.install': 'Install', 'nav.releases': 'Releases', 'nav.ext': 'Extensions',
+        'hero.claim': 'All your services in one window',
+        'hero.tag': 'Messengers, mail and web apps side by side. Each service runs in its own isolated session, so several accounts of the same service stay signed in at once.',
+        'cta.download': 'Download for macOS', 'cta.all': 'All Releases',
+        'meta.fallback': 'Apple Silicon · DMG · free',
+        'shot.home': 'The rail holds your services. Everything to the right is the service itself, untouched.',
+        'feat.label': 'What It Does', 'feat.title': 'One window instead of eight',
+        'feat.lede': 'Vertex owns the frame — the rail, the title bar, notifications and settings. Inside, each service renders itself exactly as it does in a browser.',
+        'f1.h': 'Isolated sessions', 'f1.p': 'Every service gets its own storage partition. Two work accounts and a private one in the same messenger, all signed in at once, none of them aware of the others.',
+        'f2.h': 'System notifications', 'f2.p': 'Banners come from macOS itself, so dismissing one does not drag you into the app. An in-app bubble takes over if the system turns them down.',
+        'f3.h': '78 services ready', 'f3.p': 'Telegram, Slack, WhatsApp, Discord, Gmail, Notion, Figma, Linear and more from the catalog — or paste any URL and it becomes a service.',
+        'f4.h': 'Sleeps when idle', 'f4.p': "Inactive services are throttled and put to sleep after a few minutes, so a dozen open services do not cost you a dozen services' worth of CPU.",
+        'f5.h': 'Extensions', 'f5.p': 'Content blocking, cookie banners, proxy. The registry is data only — plain JSON, no executable code is fetched or run.',
+        'f6.h': 'Yours to colour', 'f6.p': 'Eleven palettes, each in a dark and a light version, plus twelve colourways for the app icon. Pick a look and the whole frame follows.',
+        'svc.label': 'Services', 'svc.title': 'Bundled icons for the messengers you use',
+        'svc.lede': 'Twelve messengers ship with their own icon in one consistent style, so the rail reads cleanly instead of mixing cut-out logos with white boxes. Everything else uses the site favicon.',
+        'svc.more': '+ 66 more in the catalog',
+        'look.label': 'Appearance', 'look.title': 'Twelve icons, twenty-two themes',
+        'look.lede': 'The mark is a vertex — the point where edges meet, which is what the app does with your services. Pick the colourway that suits your dock.',
+        'shot.settings': 'Palette and icon are separate choices — a blue icon with a warm interface is allowed.',
+        'ins.label': 'Install', 'ins.title': 'Getting it running',
+        'ins.lede': 'Download the DMG, drag Vertex into Applications. One extra step the first time — please read it, otherwise the app looks broken when it is not.',
+        'ins.warnH': 'macOS will block the first launch',
+        'ins.warn1': 'Vertex is signed <strong>ad-hoc</strong>, not with an Apple Developer ID — that certificate costs $99 a year and this is a free app. macOS therefore greets the first launch with “Vertex is damaged and can’t be opened”. The download is fine; macOS simply refuses to vouch for it.',
+        'ins.warn2': 'Right-click <strong>Vertex.app</strong> and choose <strong>Open</strong>, then confirm. Or clear the quarantine flag once:',
+        'ins.warn3': 'After that it launches normally. Only the very first run is affected.',
+        'spec.os.k': 'Platform', 'spec.os.v': 'macOS 12 Monterey or newer',
+        'spec.arch.k': 'Architecture', 'spec.arch.v': 'Apple Silicon (arm64)',
+        'spec.dl.k': 'Download', 'spec.dl.v': 'DMG, about 122 MB',
+        'spec.price.k': 'Price', 'spec.price.v': 'free',
+        'spec.src.k': 'Source', 'spec.src.v': 'closed',
+        'foot.by': 'by kvls'
+    },
+    de: {
+        'nav.features': 'Funktionen', 'nav.services': 'Dienste', 'nav.looks': 'Aussehen',
+        'nav.install': 'Installation', 'nav.releases': 'Versionen', 'nav.ext': 'Erweiterungen',
+        'hero.claim': 'Alle Dienste in einem Fenster',
+        'hero.tag': 'Messenger, E-Mail und Web-Apps nebeneinander. Jeder Dienst laeuft in einer eigenen, abgeschotteten Sitzung — mehrere Konten desselben Dienstes bleiben gleichzeitig angemeldet.',
+        'cta.download': 'Fuer macOS laden', 'cta.all': 'Alle Versionen',
+        'meta.fallback': 'Apple Silicon · DMG · kostenlos',
+        'shot.home': 'Links die Leiste mit den Diensten. Alles rechts davon ist der Dienst selbst, unveraendert.',
+        'feat.label': 'Was es tut', 'feat.title': 'Ein Fenster statt acht',
+        'feat.lede': 'Vertex gehoert der Rahmen — Leiste, Titelzeile, Benachrichtigungen und Einstellungen. Darin zeigt sich jeder Dienst genauso wie im Browser.',
+        'f1.h': 'Getrennte Sitzungen', 'f1.p': 'Jeder Dienst bekommt einen eigenen Speicherbereich. Zwei Arbeitskonten und ein privates im selben Messenger, alle gleichzeitig angemeldet, keines weiss vom anderen.',
+        'f2.h': 'Systemmeldungen', 'f2.p': 'Die Banner kommen von macOS selbst — wer eines wegklickt, landet nicht in der App. Lehnt das System sie ab, springt die eigene Sprechblase ein.',
+        'f3.h': '78 Dienste dabei', 'f3.p': 'Telegram, Slack, WhatsApp, Discord, Gmail, Notion, Figma, Linear und mehr aus dem Katalog — oder eine beliebige Adresse einfuegen, fertig ist der Dienst.',
+        'f4.h': 'Schlaeft bei Nichtstun', 'f4.p': 'Untaetige Dienste werden gedrosselt und nach wenigen Minuten schlafen gelegt. Ein Dutzend offene Dienste kostet damit nicht ein Dutzend Dienste an Rechenzeit.',
+        'f5.h': 'Erweiterungen', 'f5.p': 'Werbeblocker, Cookie-Banner, Proxy. Das Verzeichnis enthaelt nur Daten — schlichtes JSON, es wird kein ausfuehrbarer Code geladen.',
+        'f6.h': 'Faerbbar', 'f6.p': 'Elf Paletten, jede hell und dunkel, dazu zwoelf Farbfassungen des App-Symbols. Einmal waehlen, der ganze Rahmen zieht nach.',
+        'svc.label': 'Dienste', 'svc.title': 'Eigene Symbole fuer die gaengigen Messenger',
+        'svc.lede': 'Zwoelf Messenger bringen ein eigenes Symbol in einheitlichem Stil mit. Die Leiste wirkt dadurch ruhig, statt freigestellte Logos mit weissen Kaesten zu mischen. Alle uebrigen nutzen weiter das Favicon der Seite.',
+        'svc.more': '+ 66 weitere im Katalog',
+        'look.label': 'Aussehen', 'look.title': 'Zwoelf Symbole, zweiundzwanzig Themen',
+        'look.lede': 'Die Marke ist ein Vertex — der Punkt, in dem Kanten zusammenlaufen. Genau das tut die App mit den Diensten. Waehle die Fassung, die zu deinem Dock passt.',
+        'shot.settings': 'Palette und Symbol sind getrennte Entscheidungen — ein blaues Symbol zu warmer Oberflaeche ist erlaubt.',
+        'ins.label': 'Installation', 'ins.title': 'In Betrieb nehmen',
+        'ins.lede': 'DMG laden, Vertex nach Programme ziehen. Beim ersten Start kommt ein zusaetzlicher Schritt — bitte lesen, sonst wirkt die App kaputt, obwohl sie es nicht ist.',
+        'ins.warnH': 'macOS blockiert den ersten Start',
+        'ins.warn1': 'Vertex ist <strong>ad-hoc</strong> signiert, nicht mit einer Apple Developer ID — dieses Zertifikat kostet 99 $ im Jahr, und die App ist kostenlos. macOS begruesst den ersten Start deshalb mit „Vertex ist beschaedigt und kann nicht geoeffnet werden“. Die Datei ist in Ordnung; macOS will nur nicht fuer sie buergen.',
+        'ins.warn2': 'Rechtsklick auf <strong>Vertex.app</strong>, dann <strong>Oeffnen</strong> und bestaetigen. Oder das Quarantaene-Merkmal einmal entfernen:',
+        'ins.warn3': 'Danach startet sie normal. Betroffen ist nur der allererste Start.',
+        'spec.os.k': 'Plattform', 'spec.os.v': 'macOS 12 Monterey oder neuer',
+        'spec.arch.k': 'Architektur', 'spec.arch.v': 'Apple Silicon (arm64)',
+        'spec.dl.k': 'Download', 'spec.dl.v': 'DMG, rund 122 MB',
+        'spec.price.k': 'Preis', 'spec.price.v': 'kostenlos',
+        'spec.src.k': 'Quelltext', 'spec.src.v': 'geschlossen',
+        'foot.by': 'von kvls'
+    },
+    ru: {
+        'nav.features': 'Возможности', 'nav.services': 'Сервисы', 'nav.looks': 'Оформление',
+        'nav.install': 'Установка', 'nav.releases': 'Версии', 'nav.ext': 'Расширения',
+        'hero.claim': 'Все сервисы в одном окне',
+        'hero.tag': 'Мессенджеры, почта и веб-приложения рядом. Каждый сервис в собственной изолированной сессии, поэтому несколько аккаунтов одного сервиса остаются в сети одновременно.',
+        'cta.download': 'Скачать для macOS', 'cta.all': 'Все версии',
+        'meta.fallback': 'Apple Silicon · DMG · бесплатно',
+        'shot.home': 'Слева рельс с сервисами. Всё справа — сам сервис, без изменений.',
+        'feat.label': 'Что умеет', 'feat.title': 'Одно окно вместо восьми',
+        'feat.lede': 'Vertex владеет рамкой — рельсом, заголовком, уведомлениями и настройками. Внутри каждый сервис рисует себя ровно так же, как в браузере.',
+        'f1.h': 'Изолированные сессии', 'f1.p': 'У каждого сервиса своё хранилище. Два рабочих аккаунта и личный в одном мессенджере — все в сети одновременно, и ни один не знает о других.',
+        'f2.h': 'Системные уведомления', 'f2.p': 'Баннеры рисует сама macOS, поэтому закрытие не затягивает вас в приложение. Если система откажет, включается собственный тост.',
+        'f3.h': '78 сервисов в каталоге', 'f3.p': 'Telegram, Slack, WhatsApp, Discord, Gmail, Notion, Figma, Linear и другие — или вставьте любой адрес, и он станет сервисом.',
+        'f4.h': 'Засыпает без дела', 'f4.p': 'Неактивные сервисы притормаживаются и через несколько минут засыпают. Десяток открытых сервисов не стоит десятка сервисов по нагрузке.',
+        'f5.h': 'Расширения', 'f5.p': 'Блокировка рекламы, баннеры cookie, прокси. Реестр содержит только данные — обычный JSON, исполняемый код не загружается.',
+        'f6.h': 'Под ваш цвет', 'f6.p': 'Одиннадцать палитр, каждая в тёмном и светлом варианте, плюс двенадцать цветовых решений значка. Выбрали — и вся рамка подстроилась.',
+        'svc.label': 'Сервисы', 'svc.title': 'Свои иконки для популярных мессенджеров',
+        'svc.lede': 'Двенадцать мессенджеров идут с собственной иконкой в едином стиле — рельс выглядит опрятно, а не смесью вырезанных логотипов и белых квадратов. Остальные по-прежнему берут фавикон сайта.',
+        'svc.more': '+ ещё 66 в каталоге',
+        'look.label': 'Оформление', 'look.title': 'Двенадцать иконок, двадцать две темы',
+        'look.lede': 'Знак — это вершина, точка схождения рёбер. Ровно это приложение делает с вашими сервисами. Выберите решение под свой док.',
+        'shot.settings': 'Палитра и значок выбираются отдельно — синий значок с тёплым интерфейсом допустим.',
+        'ins.label': 'Установка', 'ins.title': 'Как запустить',
+        'ins.lede': 'Скачайте DMG, перетащите Vertex в «Программы». При первом запуске понадобится один дополнительный шаг — прочитайте его, иначе приложение покажется сломанным, хотя это не так.',
+        'ins.warnH': 'macOS заблокирует первый запуск',
+        'ins.warn1': 'Vertex подписан <strong>ad-hoc</strong>, а не сертификатом Apple Developer ID — он стоит 99 $ в год, а приложение бесплатное. Поэтому macOS встретит первый запуск сообщением «Vertex повреждён и не может быть открыт». С файлом всё в порядке; система просто не готова за него поручиться.',
+        'ins.warn2': 'Нажмите правой кнопкой на <strong>Vertex.app</strong>, выберите <strong>Открыть</strong> и подтвердите. Либо один раз снимите метку карантина:',
+        'ins.warn3': 'После этого запускается обычным способом. Затронут только самый первый запуск.',
+        'spec.os.k': 'Платформа', 'spec.os.v': 'macOS 12 Monterey и новее',
+        'spec.arch.k': 'Архитектура', 'spec.arch.v': 'Apple Silicon (arm64)',
+        'spec.dl.k': 'Загрузка', 'spec.dl.v': 'DMG, около 122 МБ',
+        'spec.price.k': 'Цена', 'spec.price.v': 'бесплатно',
+        'spec.src.k': 'Исходный код', 'spec.src.v': 'закрыт',
+        'foot.by': 'автор kvls'
+    }
+};
+
+const TITLES = {
+    en: 'Vertex — All Your Services in One Window',
+    de: 'Vertex — Alle Dienste in einem Fenster',
+    ru: 'Vertex — все сервисы в одном окне'
+};
+const LOCALE = { en: 'en-GB', de: 'de-DE', ru: 'ru-RU' };
+
+let latest = null;
+
+function applyLang(lang) {
+    const dict = I18N[lang] || I18N.en;
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang] || TITLES.en;
+    document.querySelectorAll('[data-t]').forEach((el) => {
+        const v = dict[el.dataset.t];
+        if (v === undefined) { return; }
+        // Einige Texte enthalten bewusst <strong>, deshalb innerHTML.
+        if (v.includes('<')) { el.innerHTML = v; } else { el.textContent = v; }
+    });
+    document.querySelectorAll('.lang button').forEach((b) => {
+        b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
+    });
+    try { localStorage.setItem('vertex-lang', lang); } catch (e) { /* egal */ }
+    renderMeta(lang);
+}
+
+function renderMeta(lang) {
+    const el = document.getElementById('meta');
+    const dict = I18N[lang] || I18N.en;
+    if (!latest) { return; }
+    const date = new Date(latest.published_at).toLocaleDateString(LOCALE[lang] || 'en-GB', {
+        day: 'numeric', month: 'long', year: 'numeric'
+    });
+    el.textContent = `${latest.tag_name} · ${date} · ${dict['meta.fallback']}`;
+}
+
+document.querySelectorAll('.lang button').forEach((b) => {
+    b.addEventListener('click', () => applyLang(b.dataset.lang));
+});
+
+// Gespeicherte oder vom Browser gemeldete Sprache uebernehmen.
+let start = 'en';
+try { start = localStorage.getItem('vertex-lang') || ''; } catch (e) { start = ''; }
+if (!start) {
+    const nav = (navigator.language || 'en').slice(0, 2);
+    start = I18N[nav] ? nav : 'en';
+}
+applyLang(start);
+
+// Version und Datum der neuesten Veroeffentlichung nachtragen, damit die Seite
+// bei jedem Release unveraendert bleiben kann.
 fetch('https://api.github.com/repos/kvlsx/vertex-releases/releases/latest')
     .then((r) => (r.ok ? r.json() : null))
     .then((rel) => {
         if (!rel || !rel.tag_name) { return; }
-        const date = new Date(rel.published_at).toLocaleDateString('en-GB', {
-            day: 'numeric', month: 'long', year: 'numeric'
-        });
-        document.getElementById('meta').textContent =
-            `${rel.tag_name} · ${date} · Apple Silicon · DMG · free`;
+        latest = rel;
+        renderMeta(document.documentElement.lang);
     })
     .catch(() => {});
 </script>

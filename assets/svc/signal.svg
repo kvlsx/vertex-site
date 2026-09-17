@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Vertex - mitgeliefertes Dienst-Symbol, erzeugt von build/make-service-icons.py -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <circle cx="32" cy="32" r="32" fill="#3A76F0"/>
+  <path d="M32 13c-10.5 0-19 7.7-19 17.2 0 4.9 2.3 9.3 6 12.5L17 52l10.2-3.6c1.5.3 3.1.5 4.8.5 10.5 0 19-7.7 19-17.2S42.5 13 32 13z" fill="none" stroke="#fff" stroke-width="3.6" stroke-linejoin="round"/>
+</svg>
