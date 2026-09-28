@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" data-title="title.releases">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertex — Releases</title>
+<meta name="description" content="Every Vertex version with its changes, loaded from GitHub.">
+<link rel="icon" href="assets/icons/pixel.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="sub">
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="mk"><img src="assets/mark.svg" alt="" width="34" height="34"></span>VERTEX</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i></button>
+    <nav class="links" id="links">
+      <a href="index.html#features" data-t="nav.features">Features</a>
+      <a href="index.html#services" data-t="nav.services">Services</a>
+      <a href="index.html#looks" data-t="nav.looks">Appearance</a>
+      <a href="releases.html" aria-current="page" data-t="nav.releases">Releases</a>
+      <a href="extensions.html" data-t="nav.ext">Extensions</a>
+      <a class="hl" href="index.html#install" data-t="nav.install">Install</a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="de">DE</button><button data-lang="ru">RU</button><button data-lang="uk">UK</button></div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="sub-hero">
+  <div class="wrap">
+    <span class="label" data-t="rel.label">Releases</span>
+    <h1 class="h2" data-t="rel.title">Every version</h1>
+    <p class="lede" data-t="rel.lede">Each version with its changes, loaded straight from GitHub. The newest is at the top.</p>
+    <div class="ctas">
+      <a class="btn" data-dl href="https://github.com/kvlsx/vertex-releases/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v13M5.5 10 12 16.5 18.5 10M4 21h16"/></svg><span data-t="cta.download">Download for macOS</span></a>
+      <a class="btn w" href="https://github.com/kvlsx/vertex-releases/releases"><span data-t="rel.github">View on GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <p class="meta" id="meta" data-t="meta.fallback">Apple Silicon · DMG · free</p>
+  </div>
+</section>
+
+<section class="rel">
+  <div class="wrap">
+    <p class="rel-hint" data-t="rel.notesEn" data-t-hide-empty hidden></p>
+    <div class="rel-list" id="relList" aria-live="polite">
+      <p class="rel-state" id="relState" data-t="rel.loading">Loading releases from GitHub…</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="foot-logo" href="index.html"><span class="mk"><img src="assets/mark.svg" alt="" width="40" height="40"></span>VERTEX</a>
+        <p data-t="hero.claim">All your services in one window</p>
+        <a class="btn" data-dl href="https://github.com/kvlsx/vertex-releases/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v13M5.5 10 12 16.5 18.5 10M4 21h16"/></svg><span data-t="cta.download">Download for macOS</span></a>
+      </div>
+      <nav class="foot-col" data-t-label="foot.product" aria-label="Product">
+        <h3 data-t="foot.product">Product</h3>
+        <a href="index.html#features" data-t="nav.features">Features</a>
+        <a href="index.html#services" data-t="nav.services">Services</a>
+        <a href="index.html#looks" data-t="nav.looks">Appearance</a>
+        <a href="index.html#install" data-t="nav.install">Install</a>
+      </nav>
+      <nav class="foot-col" data-t-label="foot.project" aria-label="Project">
+        <h3 data-t="foot.project">Project</h3>
+        <a href="releases.html" aria-current="page" data-t="nav.releases">Releases</a>
+        <a href="https://github.com/kvlsx/vertex-releases" data-t="nav.github">GitHub</a>
+        <a href="extensions.html" data-t="nav.ext">Extensions</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy-r">© 2026 kvls</span>
+      <p class="tm" data-t="tm.note">Product names are trademarks of their respective owners and are used here only to describe compatibility. Vertex is not affiliated with, endorsed or sponsored by any of them.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/page.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/releases.js"></script>
+</body>
+</html>

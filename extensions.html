@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-title="title.ext">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vertex — Extensions</title>
+<meta name="description" content="Vertex extensions: content blocking, cookie banners and proxy. Data only, signed, nothing executes.">
+<link rel="icon" href="assets/icons/pixel.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="sub">
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="mk"><img src="assets/mark.svg" alt="" width="34" height="34"></span>VERTEX</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i></button>
+    <nav class="links" id="links">
+      <a href="index.html#features" data-t="nav.features">Features</a>
+      <a href="index.html#services" data-t="nav.services">Services</a>
+      <a href="index.html#looks" data-t="nav.looks">Appearance</a>
+      <a href="releases.html" data-t="nav.releases">Releases</a>
+      <a href="extensions.html" aria-current="page" data-t="nav.ext">Extensions</a>
+      <a class="hl" href="index.html#install" data-t="nav.install">Install</a>
+      <div class="lang" role="group" aria-label="Language"><button data-lang="en">EN</button><button data-lang="de">DE</button><button data-lang="ru">RU</button><button data-lang="uk">UK</button></div>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="sub-hero">
+  <div class="wrap">
+    <span class="label" data-t="ext.label">Extensions</span>
+    <h1 class="h2" data-t="ext.title">Extensions are data</h1>
+    <p class="lede" data-t="ext.lede">Extensions change how every service behaves — blocking, banners, routing. Each one is a signed JSON file: filter lists and addresses, never code.</p>
+    <div class="ctas">
+      <a class="btn" data-dl href="https://github.com/kvlsx/vertex-releases/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v13M5.5 10 12 16.5 18.5 10M4 21h16"/></svg><span data-t="cta.download">Download for macOS</span></a>
+      <a class="btn w" href="https://github.com/kvlsx/vertex-extensions"><span data-t="ext.github">Registry on GitHub</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="xl">
+  <div class="wrap">
+    <div class="xl-grid" id="extList">
+      <article class="xc c-w" data-ext="ublock-origin">
+        <div class="xc-top"><span class="xc-type" data-t="ext.type.adblocker">Content blocker</span><span class="xc-ver" data-ver>&nbsp;</span></div>
+        <div class="xc-glyph"><svg viewBox="0 0 120 120" fill="none" stroke="#0b0b0b" stroke-width="7" stroke-linejoin="miter"><path d="M60 10 102 26v32c0 26-18 44-42 52-24-8-42-26-42-52V26z" fill="#ff4d2e"/><path d="M40 58l14 14 28-30" stroke="#fff" stroke-linecap="square"/></svg></div>
+        <h2 class="xc-name">uBlock Origin</h2>
+        <p class="xc-desc" data-t="ext.ublock.p">Blocks ads, trackers and annoyances with the uBlock Origin filter set, EasyList, EasyPrivacy, AdGuard tracking protection and the URLhaus malware list.</p>
+        <p class="xc-by"><span data-t="ext.by">Source</span>: Raymond Hill (gorhill) &amp; uAssets</p>
+      </article>
+      <article class="xc c-y" data-ext="idcac">
+        <div class="xc-top"><span class="xc-type" data-t="ext.type.adblocker">Content blocker</span><span class="xc-ver" data-ver>&nbsp;</span></div>
+        <div class="xc-glyph"><svg viewBox="0 0 120 120" fill="none" stroke="#0b0b0b" stroke-width="7"><path d="M60 12a48 48 0 1 0 48 48 16 16 0 0 1-18-18 16 16 0 0 1-18-18A16 16 0 0 1 60 12z" fill="#ffe600" stroke-linejoin="round"/><rect x="36" y="48" width="12" height="12" fill="#0b0b0b"/><rect x="58" y="72" width="12" height="12" fill="#0b0b0b"/><rect x="34" y="78" width="10" height="10" fill="#0b0b0b"/><path d="M14 106 106 14" stroke="#ff4d2e" stroke-width="9" stroke-linecap="square"/></svg></div>
+        <h2 class="xc-name">I Still Don’t Care About Cookies</h2>
+        <p class="xc-desc" data-t="ext.idcac.p">Hides cookie consent banners so services open straight to what you came for.</p>
+        <p class="xc-by"><span data-t="ext.by">Source</span>: OhMyGuus / Daniel Kladnik</p>
+      </article>
+      <article class="xc c-b" data-ext="foxyproxy">
+        <div class="xc-top"><span class="xc-type" data-t="ext.type.proxy">Proxy</span><span class="xc-ver" data-ver>&nbsp;</span></div>
+        <div class="xc-glyph"><svg viewBox="0 0 120 120" fill="none" stroke="#0b0b0b" stroke-width="7"><rect x="8" y="46" width="28" height="28" fill="#fff"/><rect x="46" y="46" width="28" height="28" fill="#ffe600"/><rect x="84" y="12" width="28" height="28" fill="#fff"/><rect x="84" y="80" width="28" height="28" fill="#fff"/><path d="M36 60h10M74 60h6v-34h4M80 60v34h4" stroke-linecap="square"/></svg></div>
+        <h2 class="xc-name">FoxyProxy</h2>
+        <p class="xc-desc" data-t="ext.foxy.p">Routes chosen services through an HTTP or SOCKS5 proxy, with exceptions for hosts that stay direct.</p>
+        <p class="xc-by"><span data-t="ext.by">Source</span>: FoxyProxy</p>
+      </article>
+    </div>
+    <p class="xl-how" data-t="ext.how">Install from inside Vertex: open Extensions in the rail, pick one and click Install.</p>
+  </div>
+</section>
+
+<section class="xs">
+  <div class="wrap">
+    <span class="label" data-t="ext.stepsLabel">How it works</span>
+    <div class="xs-grid">
+      <div class="xs-step"><span class="xs-n">01</span><h3 data-t="ext.s1.h">Signed registry</h3><p data-t="ext.s1.p">The list is signed with an Ed25519 key built into the app. Anything that does not match the signature is rejected.</p></div>
+      <div class="xs-step"><span class="xs-n">02</span><h3 data-t="ext.s2.h">Data, not code</h3><p data-t="ext.s2.p">A content blocker is a set of filter lists, a proxy is an address. There is no field an extension could use to run a script.</p></div>
+      <div class="xs-step"><span class="xs-n">03</span><h3 data-t="ext.s3.h">Yours to switch</h3><p data-t="ext.s3.p">Turn an extension off or remove it at any time. The proxy applies only to the services you pick.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="foot-logo" href="index.html"><span class="mk"><img src="assets/mark.svg" alt="" width="40" height="40"></span>VERTEX</a>
+        <p data-t="hero.claim">All your services in one window</p>
+        <a class="btn" data-dl href="https://github.com/kvlsx/vertex-releases/releases/latest"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" aria-hidden="true"><path d="M12 3v13M5.5 10 12 16.5 18.5 10M4 21h16"/></svg><span data-t="cta.download">Download for macOS</span></a>
+      </div>
+      <nav class="foot-col" data-t-label="foot.product" aria-label="Product">
+        <h3 data-t="foot.product">Product</h3>
+        <a href="index.html#features" data-t="nav.features">Features</a>
+        <a href="index.html#services" data-t="nav.services">Services</a>
+        <a href="index.html#looks" data-t="nav.looks">Appearance</a>
+        <a href="index.html#install" data-t="nav.install">Install</a>
+      </nav>
+      <nav class="foot-col" data-t-label="foot.project" aria-label="Project">
+        <h3 data-t="foot.project">Project</h3>
+        <a href="releases.html" data-t="nav.releases">Releases</a>
+        <a href="https://github.com/kvlsx/vertex-releases" data-t="nav.github">GitHub</a>
+        <a href="extensions.html" aria-current="page" data-t="nav.ext">Extensions</a>
+      </nav>
+    </div>
+    <div class="foot-bottom">
+      <span class="copy-r">© 2026 kvls</span>
+      <p class="tm" data-t="tm.note">Product names are trademarks of their respective owners and are used here only to describe compatibility. Vertex is not affiliated with, endorsed or sponsored by any of them.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/page.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/extensions.js"></script>
+</body>
+</html>
