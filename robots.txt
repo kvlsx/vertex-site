@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /drafts/
+
+Sitemap: https://kvlsx.github.io/vertex-site/sitemap.xml
